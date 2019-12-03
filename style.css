@@ -1,0 +1,70 @@
+.body{
+    background: rgb(197, 85, 231);
+}
+
+.head{
+    background-color: red;
+}
+
+.main{
+    margin-top: 10%;
+    display: none;
+}
+
+.Tic{
+    margin-top: 10%;
+    display: none; 
+}
+
+.options li:hover{
+    background: rgb(228, 218, 218);
+}
+
+.tops{
+    font-size: 2em;
+}
+
+.somes{
+    margin-top: -5px;
+}
+
+.bottom{
+    margin-top: 10%;
+}
+
+.v{
+    display: inline-block;
+    padding-left: 50px;
+}
+
+
+
+
+
+h1{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 20px;
+
+}
+
+.tables , .tabless{
+    border-collapse: collapse;
+    border-spacing: 0;
+    padding: 0px;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+table tr td, div tr td{
+    width: 80px;
+    height: 80px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+table tr td:hover, div tr td:hover{
+    background: #e4e4e4;
+    cursor: pointer;
+
+}
