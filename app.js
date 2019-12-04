@@ -122,15 +122,18 @@ list.addEventListener("click", (e) => {
 
 
 const start = document.querySelector("#btn");
-// const restart = document.querySelector("#btn1");
+const restarts = document.querySelector("#btn1");
 const table = document.querySelector(".tables");
 const tt = document.querySelectorAll(".tables tr td");
 const tic = document.querySelector('.Tic');
 const ttt = document.querySelector('.ttt');
+const scores = document.querySelector('.score');
 
 
 
 let counter = 0;
+let xScore = 0;
+let oScore = 0;
 
 
 function check(){
@@ -157,9 +160,9 @@ function check(){
         row3 += arr[i]
     }
 
-    row1 == "XXX" ? alert("X win") : row1 == "OOO" ? alert("O wins") : "ww"
-    row3 == "XXX" ? alert("X win") : row3 == "OOO" ? alert("O wins") : "ww"
-    row2 == "XXX" ? alert("X win") : row2 == "OOO" ? alert("O wins") : "ww"
+    row1 == "XXX" ? xWins() : row1 == "OOO" ? oWins() : "ww"
+    row3 == "XXX" ? xWins() : row3 == "OOO" ? oWins() : "ww"
+    row2 == "XXX" ? xWins() : row2 == "OOO" ? oWins() : "ww"
 
     let column1 = "";
     let column2 = ""
@@ -177,16 +180,11 @@ function check(){
         column3 += arr[i]
     }
 
-    column1 == "XXX" ? alert("X win") : column1 == "OOO" ? alert("O wins") : "ww"  
-    column2 == "XXX" ? alert("X win") : column2 == "OOO" ? alert("O wins") : "ww"
-    column3 == "XXX" ? alert("X win") : column3 == "OOO" ? alert("O wins") : "ww"
+    column1 == "XXX" ? xWins() : column1 == "OOO" ? oWins() : "ww"  
+    column2 == "XXX" ? xWins() : column2 == "OOO" ? oWins() : "ww"
+    column3 == "XXX" ? xWins() : column3 == "OOO" ? oWins() : "ww"
 
 
-
-    if (column1 == "XXX"){
-        alert("X Wins");
-        table.removeEventListener("click", input())
-    }
 
     let l = "";
     let o = ""
@@ -198,34 +196,107 @@ function check(){
         o += arr[i]
     }
 
-    l == "XXX" ? alert("X win") : l == "OOO" ? alert("O wins") : "ww"
-    o == "XXX" ? alert("X win") : o == "OOO" ? alert("O wins") : "ww"
+    l == "XXX" ? xWins() : l == "OOO" ? oWins() : "ww"
+    o == "XXX" ? xWins() : o == "OOO" ? oWins() : "ww"
+}
+
+let ag;
+
+function oWins(){
+    oScore++
+    scores.textContent = `X-Score : ${xScore}  O-Score  : ${oScore}`
+    ag = confirm("woul you like another round")
+    if (ag == true){
+        counter = 0;
+        tt.forEach((t)=>{
+            t.textContent = "";
+        })
+        input()
+    }else{
+        select.style.display = "block";
+        main.style.display = "none";
+        tic.style.display = "none";
+    }
+    
+}
+
+function xWins(){
+    alert("X wins");
+    table.removeEventListener("click", input)
+    xScore++
+    scores.textContent = `X-Score : ${xScore}  O-Score  : ${oScore}`
+}
+x = 0;
+let a;
+
+function input(e){
+    x = 0
+    if (e.target.textContent == ""){
+        if (counter % 2 == 0 && counter < 9){
+            e.target.textContent = 'X'
+            
+        }else if (counter % 2 != 0 && counter < 9){
+            e.target.textContent = 'O'
+
+        }else{
+            alert('Game Over')
+        }
+        counter++
+
+        check()
+
+
+    }
+
+    tt.forEach((t)=>{
+        if(t.textContent == ""){
+            console.log(t.textContent)
+            x++
+
+        }
+    })
+    console.log(x)
+
+    if(x == 0){
+    a = confirm("draw...Again??")
+    if (a == true){
+        counter = 0;
+        tt.forEach((t)=>{
+            t.textContent = "";
+        })
+        input()
+    }else{
+        select.style.display = "block";
+        main.style.display = "none";
+        tic.style.display = "none";
+    }
+}
+
 }
 
 ttt.addEventListener("click", (e) => {
+    tt.forEach((t)=>{
+        t.textContent = "";
+    })
+    counter = 0;
+    xScore = 0;
+    oScore = 0;
+    scores.textContent = `X-Score : ${xScore}  O-Score  : ${oScore}`
+
     select.style.display = "none";
     main.style.display = "none";
     tic.style.display = "block";
-
+    console.log("...")
+    table.addEventListener("click", input)
 })
 
-start.addEventListener("click", (e) => {
-    console.log("...")
-    table.addEventListener("click", function input(e){
-        if (e.target.textContent == ""){
-            if (counter % 2 == 0 && counter < 9){
-                e.target.textContent = 'X'
-                
-            }else if (counter % 2 != 0 && counter < 9){
-                e.target.textContent = 'O'
-    
-            }else{
-                alert('Game Over')
-            }
-            counter++
-    
-            check()
-        }
-
+restarts.addEventListener("click", (e)=>{
+    tt.forEach((t)=>{
+        t.textContent = "";
     })
+    a = ""
+    counter = 0;
+    xScore = 0;
+    oScore = 0;
+    scores.textContent = `X-Score : ${xScore}  O-Score  : ${oScore}`
 })
