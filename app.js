@@ -205,7 +205,7 @@ let ag;
 function oWins(){
     oScore++
     scores.textContent = `X-Score : ${xScore}  O-Score  : ${oScore}`
-    ag = confirm("woul you like another round")
+    ag = confirm("O wins would you like another round")
     if (ag == true){
         counter = 0;
         tt.forEach((t)=>{
@@ -223,7 +223,7 @@ function oWins(){
 function xWins(){
     xScore++
     scores.textContent = `X-Score : ${xScore}  O-Score  : ${oScore}`
-    ag = confirm("woul you like another round")
+    ag = confirm("X wins would you like another round")
     if (ag == true){
         counter = 0;
         tt.forEach((t)=>{
