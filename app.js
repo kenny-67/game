@@ -221,10 +221,20 @@ function oWins(){
 }
 
 function xWins(){
-    alert("X wins");
-    table.removeEventListener("click", input)
     xScore++
     scores.textContent = `X-Score : ${xScore}  O-Score  : ${oScore}`
+    ag = confirm("woul you like another round")
+    if (ag == true){
+        counter = 0;
+        tt.forEach((t)=>{
+            t.textContent = "";
+        })
+        input()
+    }else{
+        select.style.display = "block";
+        main.style.display = "none";
+        tic.style.display = "none";
+    }
 }
 x = 0;
 let a;
