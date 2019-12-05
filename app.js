@@ -128,16 +128,17 @@ const tt = document.querySelectorAll(".tables tr td");
 const tic = document.querySelector('.Tic');
 const ttt = document.querySelector('.ttt');
 const scores = document.querySelector('.score');
+const se = document.querySelector('.op');
 
 
 
 let counter = 0;
 let xScore = 0;
 let oScore = 0;
-
+let arr;
 
 function check(){
-    let arr = [];
+    arr = [];
     tt.forEach((e) => {
         arr.push(e.textContent);
     })
@@ -238,6 +239,10 @@ function xWins(){
 }
 x = 0;
 let a;
+let y 
+
+
+
 
 function input(e){
     x = 0
@@ -285,19 +290,24 @@ function input(e){
 }
 
 ttt.addEventListener("click", (e) => {
-    tt.forEach((t)=>{
-        t.textContent = "";
-    })
-    counter = 0;
-    xScore = 0;
-    oScore = 0;
-    scores.textContent = `X-Score : ${xScore}  O-Score  : ${oScore}`
+    if (se.value == "multiPlayer"){
+        tt.forEach((t)=>{
+            t.textContent = "";
+        })
+        counter = 0;
+        xScore = 0;
+        oScore = 0;
+        scores.textContent = `X-Score : ${xScore}  O-Score  : ${oScore}`
 
-    select.style.display = "none";
-    main.style.display = "none";
-    tic.style.display = "block";
-    console.log("...")
-    table.addEventListener("click", input)
+        select.style.display = "none";
+        main.style.display = "none";
+        tic.style.display = "block";
+        console.log("...")
+        table.addEventListener("click", input)
+    }else{
+        onePlayer()
+    }
+    
 })
 
 restarts.addEventListener("click", (e)=>{
@@ -310,3 +320,56 @@ restarts.addEventListener("click", (e)=>{
     oScore = 0;
     scores.textContent = `X-Score : ${xScore}  O-Score  : ${oScore}`
 })
+
+
+
+// Single Player Mode
+
+function onePlayer(){
+    
+
+    counter = 0;
+    xScore = 0;
+    oScore = 0;
+    scores.textContent = `X-Score : ${xScore}  O-Score  : ${oScore}`
+
+    select.style.display = "none";
+    main.style.display = "none";
+    tic.style.display = "block";
+
+    table.addEventListener("click", ai)
+}
+
+restarts.addEventListener("click", onePlayer)
+
+let ano
+
+function ai(e){
+    arr = [];
+    ano = []
+
+    if (e.target.textContent == ""){
+        e.target.textContent = "X"
+
+    }
+    tt.forEach((e) => {
+        arr.push(e.textContent);
+    })
+
+    console.log(arr);
+    
+    for(let i = 0; i < tt.length; i++){
+        if(tt[i].textContent == "X"){
+            ano.push(i)
+        }
+    }
+
+    y = Math.floor(Math.random() * tt.length);
+    if (ano.includes(y,0)){
+        y = Math.floor(Math.random() * tt.length);
+        ai()
+    }
+    tt[y].textContent = "O"
+
+    check()
+}
